@@ -1,0 +1,16 @@
+D:/Proiecte/3d/assimp-3.3.1-bin/CMakeFiles/UpdateAssimpLibsDebugSymbolsAndDLLs.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/CMakeFiles/uninstall.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/CMakeFiles/ALL_BUILD.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/CMakeFiles/ZERO_CHECK.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/contrib/zlib/CMakeFiles/zlibstatic.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/contrib/zlib/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/contrib/zlib/CMakeFiles/ALL_BUILD.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/code/CMakeFiles/assimp.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/code/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/tools/assimp_cmd/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/CMakeFiles/gtest.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/CMakeFiles/unit.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/headercheck/CMakeFiles/INSTALL.dir

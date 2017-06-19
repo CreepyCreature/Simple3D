@@ -1,0 +1,9 @@
+﻿  Building Custom Rule D:/Proiecte/3d/assimp-3.3.1/tools/assimp_cmd/CMakeLists.txt
+  CMake does not need to re-run because D:\Proiecte\3d\assimp-3.3.1-bin\tools\assimp_cmd\CMakeFiles\generate.stamp is up-to-date.
+  CompareDump.cpp
+  ImageExtractor.cpp
+  Main.cpp
+  WriteDumb.cpp
+  Info.cpp
+  Export.cpp
+  assimp_cmd.vcxproj -> D:\Proiecte\3d\assimp-3.3.1-bin\tools\assimp_cmd\Debug\assimp.exe

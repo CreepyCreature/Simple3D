@@ -1,0 +1,133 @@
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 14.12.2016 11:35:46.
+Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ALL_BUILD.vcxproj" on node 1 (default targets).
+Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ALL_BUILD.vcxproj" (1) is building "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ZERO_CHECK.vcxproj" (2) on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Win32\Debug\ZERO_CHECK\".
+  Creating directory "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\Debug\".
+  Creating directory "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\".
+InitializeBuildStatus:
+  Creating "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Checking Build System
+  CMake does not need to re-run because D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/gtest/CMakeFiles/generate.stamp is up-to-date.
+FinalizeBuildStatus:
+  Deleting file "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild".
+  Touching "Win32\Debug\ZERO_CHECK\ZERO_CHECK.tlog\ZERO_CHECK.lastbuildstate".
+Done Building Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ZERO_CHECK.vcxproj" (default targets).
+Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ALL_BUILD.vcxproj" (1) is building "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gmock.vcxproj" (3) on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "gmock.dir\Debug\".
+  Creating directory "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\DebugLibs\".
+  Creating directory "gmock.dir\Debug\gmock.tlog\".
+InitializeBuildStatus:
+  Creating "gmock.dir\Debug\gmock.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Building Custom Rule D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest/googlemock/CMakeLists.txt
+  CMake does not need to re-run because D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\CMakeFiles\generate.stamp is up-to-date.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googlemock\include" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googlemock" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\include" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest" /Zi /nologo /W4 /WX /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D WIN32 /D _WINDOWS /D _UNICODE /D UNICODE /D WIN32 /D _WIN32 /D STRICT /D WIN32_LEAN_AND_MEAN /D GTEST_HAS_PTHREAD=0 /D _HAS_EXCEPTIONS=1 /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"gmock.dir\Debug\\" /Fd"gmock.dir\Debug\gmock.pdb" /Gd /TP /wd4251 /wd4275 /wd4702 /analyze- /errorReport:queue  -J -bigobj "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\src\gtest-all.cc" "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googlemock\src\gmock-all.cc"
+  gtest-all.cc
+  gmock-all.cc
+  Generating Code...
+Lib:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\DebugLibs\gmock.lib" /NOLOGO  /machine:X86 "gmock.dir\Debug\gtest-all.obj"
+  "gmock.dir\Debug\gmock-all.obj"
+  gmock.vcxproj -> D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\DebugLibs\gmock.lib
+CopyFilesToOutputDirectory:
+  Copying file from "gmock.dir\Debug\gmock.pdb" to "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\DebugLibs\gmock.pdb".
+FinalizeBuildStatus:
+  Deleting file "gmock.dir\Debug\gmock.tlog\unsuccessfulbuild".
+  Touching "gmock.dir\Debug\gmock.tlog\gmock.lastbuildstate".
+Done Building Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gmock.vcxproj" (default targets).
+Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ALL_BUILD.vcxproj" (1) is building "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gmock_main.vcxproj" (4) on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "gmock_main.dir\Debug\".
+  Creating directory "gmock_main.dir\Debug\gmock_main.tlog\".
+InitializeBuildStatus:
+  Creating "gmock_main.dir\Debug\gmock_main.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Building Custom Rule D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest/googlemock/CMakeLists.txt
+  CMake does not need to re-run because D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\CMakeFiles\generate.stamp is up-to-date.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googlemock\include" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googlemock" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\include" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest" /Zi /nologo /W4 /WX /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D WIN32 /D _WINDOWS /D _UNICODE /D UNICODE /D WIN32 /D _WIN32 /D STRICT /D WIN32_LEAN_AND_MEAN /D GTEST_HAS_PTHREAD=0 /D _HAS_EXCEPTIONS=1 /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"gmock_main.dir\Debug\\" /Fd"gmock_main.dir\Debug\gmock_main.pdb" /Gd /TP /wd4251 /wd4275 /wd4702 /analyze- /errorReport:queue  -J -bigobj "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\src\gtest-all.cc" "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googlemock\src\gmock-all.cc" "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googlemock\src\gmock_main.cc"
+  gtest-all.cc
+  gmock-all.cc
+  gmock_main.cc
+  Generating Code...
+Lib:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\DebugLibs\gmock_main.lib" /NOLOGO  /machine:X86 "gmock_main.dir\Debug\gtest-all.obj"
+  "gmock_main.dir\Debug\gmock-all.obj"
+  gmock_main.dir\Debug\gmock_main.obj
+  gmock_main.vcxproj -> D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\DebugLibs\gmock_main.lib
+CopyFilesToOutputDirectory:
+  Copying file from "gmock_main.dir\Debug\gmock_main.pdb" to "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\DebugLibs\gmock_main.pdb".
+FinalizeBuildStatus:
+  Deleting file "gmock_main.dir\Debug\gmock_main.tlog\unsuccessfulbuild".
+  Touching "gmock_main.dir\Debug\gmock_main.tlog\gmock_main.lastbuildstate".
+Done Building Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gmock_main.vcxproj" (default targets).
+Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ALL_BUILD.vcxproj" (1) is building "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\gtest.vcxproj" (5) on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "gtest.dir\Debug\".
+  Creating directory "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\DebugLibs\".
+  Creating directory "gtest.dir\Debug\gtest.tlog\".
+InitializeBuildStatus:
+  Creating "gtest.dir\Debug\gtest.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Building Custom Rule D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest/googletest/CMakeLists.txt
+  CMake does not need to re-run because D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\CMakeFiles\generate.stamp is up-to-date.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\include" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest" /Zi /nologo /W4 /WX /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D WIN32 /D _WINDOWS /D _UNICODE /D UNICODE /D WIN32 /D _WIN32 /D STRICT /D WIN32_LEAN_AND_MEAN /D GTEST_HAS_PTHREAD=0 /D _HAS_EXCEPTIONS=1 /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"gtest.dir\Debug\\" /Fd"gtest.dir\Debug\gtest.pdb" /Gd /TP /wd4251 /wd4275 /wd4702 /analyze- /errorReport:queue  -J -bigobj "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\src\gtest-all.cc"
+  gtest-all.cc
+Lib:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\DebugLibs\gtest.lib" /NOLOGO  /machine:X86 "gtest.dir\Debug\gtest-all.obj"
+  gtest.vcxproj -> D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\DebugLibs\gtest.lib
+CopyFilesToOutputDirectory:
+  Copying file from "gtest.dir\Debug\gtest.pdb" to "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\DebugLibs\gtest.pdb".
+FinalizeBuildStatus:
+  Deleting file "gtest.dir\Debug\gtest.tlog\unsuccessfulbuild".
+  Touching "gtest.dir\Debug\gtest.tlog\gtest.lastbuildstate".
+Done Building Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\gtest.vcxproj" (default targets).
+Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ALL_BUILD.vcxproj" (1) is building "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\gtest_main.vcxproj" (6) on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "gtest_main.dir\Debug\".
+  Creating directory "gtest_main.dir\Debug\gtest_main.tlog\".
+InitializeBuildStatus:
+  Creating "gtest_main.dir\Debug\gtest_main.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Building Custom Rule D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest/googletest/CMakeLists.txt
+  CMake does not need to re-run because D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\CMakeFiles\generate.stamp is up-to-date.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\include" /I"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest" /Zi /nologo /W4 /WX /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D WIN32 /D _WINDOWS /D _UNICODE /D UNICODE /D WIN32 /D _WIN32 /D STRICT /D WIN32_LEAN_AND_MEAN /D GTEST_HAS_PTHREAD=0 /D _HAS_EXCEPTIONS=1 /D "CMAKE_INTDIR=\"Debug\"" /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"gtest_main.dir\Debug\\" /Fd"gtest_main.dir\Debug\gtest_main.pdb" /Gd /TP /wd4251 /wd4275 /wd4702 /analyze- /errorReport:queue  -J -bigobj "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest\googletest\src\gtest_main.cc"
+  gtest_main.cc
+Lib:
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\DebugLibs\gtest_main.lib" /NOLOGO  /machine:X86 gtest_main.dir\Debug\gtest_main.obj
+  gtest_main.vcxproj -> D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\DebugLibs\gtest_main.lib
+CopyFilesToOutputDirectory:
+  Copying file from "gtest_main.dir\Debug\gtest_main.pdb" to "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\DebugLibs\gtest_main.pdb".
+FinalizeBuildStatus:
+  Deleting file "gtest_main.dir\Debug\gtest_main.tlog\unsuccessfulbuild".
+  Touching "gtest_main.dir\Debug\gtest_main.tlog\gtest_main.lastbuildstate".
+Done Building Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\googlemock\gtest\gtest_main.vcxproj" (default targets).
+PrepareForBuild:
+  Creating directory "Win32\Debug\ALL_BUILD\".
+  Creating directory "Win32\Debug\ALL_BUILD\ALL_BUILD.tlog\".
+InitializeBuildStatus:
+  Creating "Win32\Debug\ALL_BUILD\ALL_BUILD.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Building Custom Rule D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest/CMakeLists.txt
+  CMake does not need to re-run because D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\CMakeFiles\generate.stamp is up-to-date.
+FinalizeBuildStatus:
+  Deleting file "Win32\Debug\ALL_BUILD\ALL_BUILD.tlog\unsuccessfulbuild".
+  Touching "Win32\Debug\ALL_BUILD\ALL_BUILD.tlog\ALL_BUILD.lastbuildstate".
+Done Building Project "D:\Proiecte\3d\assimp-3.3.1-bin\test\gtest\src\gtest-build\ALL_BUILD.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:09.74

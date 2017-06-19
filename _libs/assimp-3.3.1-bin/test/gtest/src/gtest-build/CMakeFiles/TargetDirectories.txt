@@ -1,0 +1,14 @@
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/CMakeFiles/RUN_TESTS.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/CMakeFiles/ALL_BUILD.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/CMakeFiles/ZERO_CHECK.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/CMakeFiles/gmock.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/CMakeFiles/gmock_main.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/CMakeFiles/RUN_TESTS.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/CMakeFiles/ALL_BUILD.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/gtest/CMakeFiles/gtest.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/gtest/CMakeFiles/RUN_TESTS.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/gtest/CMakeFiles/gtest_main.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/gtest/CMakeFiles/INSTALL.dir
+D:/Proiecte/3d/assimp-3.3.1-bin/test/gtest/src/gtest-build/googlemock/gtest/CMakeFiles/ALL_BUILD.dir

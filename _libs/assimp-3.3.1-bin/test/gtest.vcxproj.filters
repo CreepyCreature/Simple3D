@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1\test\CMakeLists.txt" />
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\7b6b349644ceb0758b3cc597869c5edc\gtest-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\7b6b349644ceb0758b3cc597869c5edc\gtest-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\7b6b349644ceb0758b3cc597869c5edc\gtest-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\7b6b349644ceb0758b3cc597869c5edc\gtest-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\7b6b349644ceb0758b3cc597869c5edc\gtest-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\7b6b349644ceb0758b3cc597869c5edc\gtest-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\7b6b349644ceb0758b3cc597869c5edc\gtest-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\e2222215eaff7e947374931c36b245bc\gtest-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Proiecte\3d\assimp-3.3.1-bin\CMakeFiles\be796cbeeb6f1d79f57d8df10e1052f3\gtest.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Proiecte\3d\assimp-3.3.1-bin\test\CMakeFiles\gtest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{27B47A21-7E7D-31D2-B513-4989CE3B7C6A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
