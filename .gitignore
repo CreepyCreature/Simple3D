@@ -2,7 +2,6 @@
 /simple3d/Debug
 
 /_libs/assimp-3.3.1/*
-/_libs/assimp-3.3.1
 !/_libs/assimp-3.3.1/include
 !/_libs/assimp-3.3.1/LICENSE
 !/_libs/assimp-3.3.1/Readme.md
