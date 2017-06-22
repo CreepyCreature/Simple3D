@@ -1,9 +1,9 @@
-
 #include "simple3d.h"
 
 
 /*
- *	
+ *	Compile this for x86 (i.e. 32bit) unless you link the x86_64 
+ *	version of the used libraries.
  *
  *	Limitation: If a textured model that has no Specular Maps
  *	is drawn with the default Lighting Shader the resulting shading is
