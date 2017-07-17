@@ -1,0 +1,10 @@
+Vertex Shader:
+	The Vertex Position attribute will always be named "position" and its location will be "0";
+	The Normal attribute will always be named "normal" and its location will be "1";
+	The Texture Coordinates attribute will always be named "tex_coords" and its location will be "2";
+
+	The Color attribute will always be named "color" and its location will be "5";
+
+
+General:
+	Uniform names shall always be prefixed with "u_" (ex: uniform mat4 u_model);
