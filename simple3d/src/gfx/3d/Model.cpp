@@ -10,7 +10,12 @@
 
 #include <iostream>
 
+
+
 // #define DEBUG // <- Uncomment this to print out debug info
+
+const char* Model::default_texture_path_ = "../_models/defaults/white-pixel.png";
+
 
 Model::Model(const GLchar* path)
 {
@@ -40,6 +45,8 @@ GLvoid Model::Init()
 GLvoid Model::Draw(const ShaderProgram & program)
 {
 	UpdateModelMatrix(program);
+	
+	// Maybe this can be easily multi-threaded
 	for (const Mesh& mesh : meshes_)
 	{
 		mesh.Draw(program);
@@ -134,6 +141,7 @@ GLvoid Model::LoadModel(const std::string & path)
 	{
 		std::cout << "Model: error loading model from file!" << std::endl;
 		std::cout << "ASSIMP: " << importer.GetErrorString() << std::endl;
+		return;
 	}
 
 	std::size_t lastfolder = path.find_last_of('/');
@@ -147,7 +155,11 @@ GLvoid Model::LoadModel(const std::string & path)
 }
 
 GLvoid Model::ProcessNode(aiNode * node, const aiScene * const scene)
-{
+{	
+#ifdef DEBUG
+	std::cout << "Processing node..\n";
+#endif // DEBUG
+
 	// Process the meshes in this node
 	for (GLuint i = 0; i < node->mNumMeshes; ++i)
 	{
@@ -167,7 +179,12 @@ Mesh Model::ProcessMesh(const aiMesh * mesh, const aiScene * const scene)
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
 	std::vector<Texture> textures;
-	GLfloat shininess;
+	Material material;
+	material.color_ambient	= glm::vec3(1.0f);
+	material.color_diffuse	= glm::vec3(1.0f);
+	material.color_specular = glm::vec3(1.0f);
+	material.shininess = 1.0f;
+	material.opacity = 1.0f;
 
 	#ifdef DEBUG
 	std::cout << "Processing Mesh" << std::endl;
@@ -202,8 +219,9 @@ Mesh Model::ProcessMesh(const aiMesh * mesh, const aiScene * const scene)
 			vertex.tex_coords.x = 0.f;
 			vertex.tex_coords.y = 0.f;
 		}
+
 		// TODO Vertex Color 
-		
+		vertex.color = glm::vec3(0.f, 0.0f, 0.0f);
 
 		vertices.push_back(vertex);
 	}
@@ -217,28 +235,95 @@ Mesh Model::ProcessMesh(const aiMesh * mesh, const aiScene * const scene)
 			{
 				indices.push_back(face.mIndices[j]);
 			}
-		}
+		}		
 	}
+
 	// Material Data
 	if (mesh->mMaterialIndex >= 0)
 	{
-		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		aiMaterial* ai_material = scene->mMaterials[mesh->mMaterialIndex];
 
-		std::vector<Texture> diff_maps = LoadMaterialTextures(material, aiTextureType_DIFFUSE);
+		// Get the diffuse maps
+		std::vector<Texture> diff_maps = LoadMaterialTextures(ai_material, aiTextureType_DIFFUSE);
 		textures.insert(textures.end(), diff_maps.begin(), diff_maps.end());
 
-		std::vector<Texture> spec_maps = LoadMaterialTextures(material, aiTextureType_SPECULAR);
+		// Get the specular maps
+		std::vector<Texture> spec_maps = LoadMaterialTextures(ai_material, aiTextureType_SPECULAR);
 		textures.insert(textures.end(), spec_maps.begin(), spec_maps.end());
 
-		shininess = LoadMaterialShininess(material, aiTextureType_SHININESS);
-	}
+		// Get the material properties if the mesh (TODO)
 
-	return Mesh(vertices, indices, textures, shininess);
+		// Material ambient color
+		aiColor3D color(1.f, 1.f, 1.f);
+		ai_material->Get(AI_MATKEY_COLOR_AMBIENT, color);
+		material.color_ambient = glm::vec3(color.r, color.g, color.b);
+
+		// Material diffuse color
+		//if (diff_maps.empty())	{
+			color = aiColor3D(1.f, 1.f, 1.f);
+			ai_material->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+			material.color_diffuse = glm::vec3(color.r, color.g, color.b);
+		//}
+
+		// Material specular color
+		if (spec_maps.empty() || spec_maps.front().placeholder)
+		{
+			color = aiColor3D(1.f, 1.f, 1.f);
+			ai_material->Get(AI_MATKEY_COLOR_SPECULAR, color);
+			material.color_specular = glm::vec3(color.r, color.g, color.b);
+		}
+
+		//Material shininess (specular exponent)
+		GLfloat shiny = 1.0f;
+		ai_material->Get(AI_MATKEY_SHININESS, shiny);
+		if (shiny > 1.0f)
+			material.shininess = shiny;
+		else material.shininess = 1.0f;
+
+		// Transparency
+		ai_material->Get(AI_MATKEY_OPACITY, material.opacity);		
+	}
+	else { std::cout << "No material index\n"; }
+
+
+	return Mesh(vertices, indices, textures, material);
 }
 
+// There are better ways of doing this, when you have the time
 std::vector<Texture> Model::LoadMaterialTextures(aiMaterial * material, aiTextureType type)
 {
 	std::vector<Texture> textures;
+
+	if (material->GetTextureCount(type) <= 0) 
+	{ 
+		// No textures of this type, load a 1x1 white pixel
+		aiString str(Model::default_texture_path_);
+		GLboolean texture_loaded = GL_FALSE;
+		for (GLuint j = 0; j < textures_loaded_.size(); ++j)
+		{
+			if (textures_loaded_[j].path == str)
+			{
+				textures.push_back(textures_loaded_[j]);
+				texture_loaded = GL_TRUE;
+				break;
+			}
+		}
+		if (!texture_loaded)
+		{
+			Texture texture;
+			texture.id		= TextureDefault();
+			texture.type	= (TextureType)type;
+			texture.path	= str;
+			texture.placeholder = true;
+
+			textures.push_back(texture);
+			textures_loaded_.push_back(texture);
+		}
+
+		#ifdef DEBUG
+		std::cout << "Loaded texture #" << i << std::endl;
+		#endif // DEBUG
+	}
 
 	for (GLuint i = 0; i < material->GetTextureCount(type); ++i)
 	{
@@ -260,14 +345,7 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial * material, aiTextur
 			texture.id		= TextureFromFile(str.C_Str(), directory_);
 			texture.type	= (TextureType)type;
 			texture.path	= str;
-
-			if (texture.type == TextureType::SPECULAR_MAP)
-			{
-				std::cout <<  texture.id 	<< " ";
-				std::cout <<  (int)texture.type	<< " ";
-				std::cout <<  texture.path.C_Str()	<< " ";
-				std::cout << std::endl;
-			}
+			texture.placeholder = false;
 
 			textures.push_back(texture);
 			textures_loaded_.push_back(texture);
@@ -280,6 +358,8 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial * material, aiTextur
 
 	return textures;
 }
+
+
 
 GLfloat Model::LoadMaterialShininess(aiMaterial * material, aiTextureType type)
 {
@@ -294,6 +374,48 @@ GLuint Model::TextureFromFile(const GLchar * path, const std::string & directory
 	std::string filestr(path);
 	filestr = directory + '/' + filestr;
 
+	std::cout << "Loading Texture from: " << filestr;
+
+	// Load the image bytes
+	GLint width, height, n;
+	GLubyte* image = stbi_load(filestr.c_str(), &width, &height, &n, STBI_rgb);
+
+	std::cout << " (" << width << ", " << height << ") " << n << std::endl;
+	
+	// Generate and bind the texture
+	GLuint texid;
+	glGenTextures(1, &texid);
+	glBindTexture(GL_TEXTURE_2D, texid);
+	// Assign the bytes from the image to the texture and generate mipmaps for it
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	std::cout << "Mipmaps\n";
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+
+
+	// Set some useful texture parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Enable Anisotropic Filtering if it is supported
+	#ifdef GL_EXT_texture_filter_anisotropic
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 32);
+	#endif // GL_EXT_texture_filter_anisotropic
+	#ifndef GL_EXT_texture_filter_anisotropic
+	std::cout << "Anisotropic filtering not supported!" << std::endl;
+	#endif // !GL_EXT_texture_filter_anisotropic
+	
+	stbi_image_free(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	
+	return texid;
+}
+
+GLuint Model::TextureDefault()
+{
+	std::string filestr = Model::default_texture_path_;
 	std::cout << "Loading Texture from: " << filestr;
 
 	// Load the image bytes
@@ -326,6 +448,6 @@ GLuint Model::TextureFromFile(const GLchar * path, const std::string & directory
 
 	stbi_image_free(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	
+
 	return texid;
 }

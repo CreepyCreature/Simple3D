@@ -8,13 +8,29 @@
 
 // #define DEBUG // <- Uncomment this to print out debug info
 
+const std::string materialdiff = "material.diffuse";
+const std::string materialspec = "material.specular";
+const std::string materialshiny = "material.shininess";
+const std::string materialopacity = "material.opacity";
+
+const std::string materialka = "material.color_ambient";
+const std::string materialkd = "material.color_diffuse";
+const std::string materialks = "material.color_specular";
+
 Mesh::Mesh()
 {
 	initialised_ = GL_FALSE;
 }
 
 Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, const std::vector<Texture>& textures, GLfloat shininess) :
-	vertices_(vertices), indices_(indices), textures_(textures), specular_shininess_(shininess)
+	vertices_(vertices), indices_(indices), textures_(textures)
+{
+	material_.shininess = shininess;
+	Setup();
+}
+
+Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, const std::vector<Texture>& textures, const Material & material) :
+	vertices_(vertices), indices_(indices), textures_(textures), material_(material)
 {
 	Setup();
 }
@@ -96,7 +112,14 @@ void Mesh::Setup()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+	InitUniforms();
+
 	initialised_ = GL_TRUE;
+}
+
+void Mesh::InitUniforms()
+{
+
 }
 
 void Mesh::Draw(const ShaderProgram& program) const
@@ -107,11 +130,13 @@ void Mesh::Draw(const ShaderProgram& program) const
 
 	if (indices_.empty() && textures_.empty())
 	{
-		DrawVertices();
+		DrawVertices();		
 	}
 	else if (textures_.empty())
 	{
-		DrawElements();
+		DrawFully(program);
+		//DrawElements();
+		//std::cout << "elements\n";
 	}
 	else
 	{
@@ -123,6 +148,34 @@ void Mesh::Draw(const ShaderProgram& program) const
 
 void Mesh::DrawFully(const ShaderProgram& program) const
 {
+	// The fact that I'm calling glGetUniformLocation and glUniform*
+	// on EVERY draw call is creating a lot of CPU overhead.
+	//
+	// Maybe initialize a the uniforms in the constructor and only call
+	// glUniform* if something changes.
+
+	// Set the material colors (Ka, Kd, Ks)
+	glUniform3f(
+		glGetUniformLocation(program.ID(), materialka.c_str()),
+		material_.color_ambient.r, material_.color_ambient.g, material_.color_ambient.b
+	);
+	glUniform3f(
+		glGetUniformLocation(program.ID(), materialkd.c_str()),
+		material_.color_diffuse.r, material_.color_diffuse.g, material_.color_diffuse.b
+	);
+	glUniform3f(
+		glGetUniformLocation(program.ID(), materialks.c_str()),
+		material_.color_specular.r, material_.color_specular.g, material_.color_specular.b
+	);
+	glUniform1f(
+		glGetUniformLocation(program.ID(), materialshiny.c_str()),
+		material_.shininess
+	);
+	glUniform1f(
+		glGetUniformLocation(program.ID(), materialopacity.c_str()),
+		material_.opacity
+	);
+
 	for (GLuint i = 0; i < textures_.size(); ++i)
 	{
 		// Activate the corresponding Texture Unit
@@ -136,10 +189,6 @@ void Mesh::DrawFully(const ShaderProgram& program) const
 			" :: Path " << textures_[i].path.C_Str() <<
 			std::endl;
 		#endif // DEBUG
-
-		std::string materialdiff = "material.diffuse";
-		std::string materialspec = "material.specular";
-		std::string materialshiny = "material.shininess";
 
 		// Get the uniform location for the Sampler
 		GLint sampler_uniform = -2;
@@ -159,7 +208,7 @@ void Mesh::DrawFully(const ShaderProgram& program) const
 
 			sampler_uniform = glGetUniformLocation(program.ID(), materialspec.c_str());
 			glUniform1f(glGetUniformLocation(program.ID(), materialshiny.c_str()),
-				specular_shininess_);
+				material_.shininess);
 		}
 
 		#ifdef DEBUG

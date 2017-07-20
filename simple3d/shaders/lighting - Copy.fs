@@ -11,13 +11,7 @@ struct Material
 {
 	sampler2D diffuse;
 	sampler2D specular;
-
-	vec3 color_ambient;
-	vec3 color_diffuse;
-	vec3 color_specular;
-
 	float shininess;
-	float opacity;	
 };
 uniform Material material;
 
@@ -123,18 +117,9 @@ void main()
 	// Overriding result color
 	//result += vec3(texture(material.diffuse, TexCoords)) * 0.00001 + shininess * 0.00001;
 	//result += vec3(texture(material.specular, TexCoords));
-	//color = vec4(result, 1.0f);
-	color = vec4(result, material.opacity); // <-- Default
+	color = vec4(result, 1.0f);
 	//color = vec4(norm, 1.0f);
 	//color = texture(material.specular, TexCoords);
-
-	//color = texture(material.specular, TexCoords);
-	//color = vec4(material.color_specular, 1.0f);
-
-	//if (material.shininess < 0.0f) color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
-	//color = vec4(vec3(material.shininess), 1.0f);
-
-	//color = texture(material.diffuse, TexCoords);
 }
 
 vec3 CalculateDirLight(DirLight light, vec3 normal, vec3 viewDir) 
@@ -150,17 +135,11 @@ vec3 CalculateDirLight(DirLight light, vec3 normal, vec3 viewDir)
 
 	// Specular
 	float spec = 0.0f;
-	if (dot(lightDir, normal) > 0.0f) 
-	{
+	if (dot(normal, lightDir) > 0.0f) {
 		vec3 reflectDir = reflect(-lightDir, normal);
-		spec = pow(max(dot(reflectDir, viewDir), 0.0f), material.shininess);	
+		spec = pow(max(dot(reflectDir, viewDir), 0.0f), material.shininess);			
 	}
-	vec3 specularOut = light.specular * spec * max(vec3(texture(material.specular, TexCoords)), 0.0f);
-
-	// Material colors (assuming the model implements them correctly)
-	ambientOut 	*= material.color_ambient	;
-	diffuseOut 	*= material.color_diffuse	;
-	specularOut	*= material.color_specular	;
+	vec3 specularOut = light.specular * spec * vec3(texture(material.specular, TexCoords));
 
 	return (ambientOut + diffuseOut + specularOut);
 }	
@@ -177,13 +156,13 @@ vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewD
 	vec3 diffuseOut = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
 
 	// Specular
-	float spec = 0.0f;
+	vec3 specularOut = vec3(0.0f);
 	if (dot(lightDir, normal) > 0.0f) 
 	{ // (diff > 0.0f) -- small optimisation perhaps
 		vec3 reflectDir = reflect(-lightDir, normal);
-		spec = pow(max(dot(reflectDir, viewDir), 0.0f), material.shininess);		
+		float spec = pow(max(dot(reflectDir, viewDir), 0.0f), material.shininess);
+		specularOut = light.specular * spec * vec3(texture(material.specular, TexCoords));
 	}
-	vec3 specularOut = light.specular * spec * vec3(texture(material.specular, TexCoords));
 
 	// Attenuation
 	float distance = length(light.position - fragPos);
@@ -195,34 +174,24 @@ vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewD
 	diffuseOut  *= attenuation;
 	specularOut *= attenuation;
 
-	// Material colors (assuming the model implements them correctly)
-	ambientOut 	*= material.color_ambient	;
-	diffuseOut 	*= material.color_diffuse	;
-	specularOut	*= material.color_specular	;
-
 	return (ambientOut + diffuseOut + specularOut);
 }
 
 vec3 CalculateSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir) 
 {
 	vec3 lightDir = normalize(light.position - fragPos);
-
 	// Ambient
 	vec3 ambientOut = light.ambient * vec3(texture(material.diffuse, TexCoords));
-
 	// Diffuse
 	float diff = max(dot(lightDir, normal), 0.0f);
 	vec3 diffuseOut = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
-
 	// Specular
 	float spec = 0.0f;
-	if (dot(normal, lightDir) > 0.0f) 
-	{
+	if (dot(normal, lightDir) > 0.0f) {
 		vec3 reflectDir = reflect(-lightDir, normal);
-		spec = pow(max(dot(reflectDir, viewDir), 1.0f), material.shininess);
+		spec = max(dot(reflectDir, viewDir), 1.0f);
 	}
-	vec3 specularOut = light.specular * spec *  vec3(texture(material.specular, TexCoords));
-
+	vec3 specularOut = light.specular * spec * vec3(texture(material.specular, TexCoords));
 	// Attenuation
 	float distance = length(light.position - fragPos);
 	float attenuation = 1.0f / (light.constant
@@ -232,7 +201,6 @@ vec3 CalculateSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir
 	ambientOut *= attenuation;
 	diffuseOut *= attenuation;
 	specularOut *= attenuation;
-
 	// Intensity
 	float theta = max(dot(-lightDir, normalize(light.direction)), 0.0f);
 	float epsilon = light.inner_cutoff - light.outer_cutoff;
@@ -241,11 +209,6 @@ vec3 CalculateSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir
 	// if (intensity < 0.999999f && intensity > 0.000001) intensity = 1000.f; // Use this to clearly see the outer cutoff
 	diffuseOut *= intensity;
 	specularOut *= intensity;
-
-	// Material colors (assuming the model implements them correctly)
-	ambientOut 	*= material.color_ambient	;
-	diffuseOut 	*= material.color_diffuse	;
-	specularOut	*= material.color_specular	;
 
 	return (ambientOut + diffuseOut + specularOut);
 }

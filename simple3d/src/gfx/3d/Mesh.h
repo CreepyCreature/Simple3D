@@ -9,6 +9,7 @@
 
 #include <vector>
 
+#include "Material.h"
 #include "Vertex.h"
 #include "../Texture.h"
 #include "../ShaderProgram.h"
@@ -21,7 +22,7 @@ private:
 	std::vector<GLuint> indices_;
 	// Material Data
 	std::vector<Texture> textures_;
-	GLfloat specular_shininess_;
+	Material material_;
 
 	// Buffer Objects
 	GLuint vao_;
@@ -32,6 +33,7 @@ private:
 public:
 	Mesh();
 	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, const std::vector<Texture>& textures, GLfloat shininess);
+	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, const std::vector<Texture>& textures, const Material& material);
 	Mesh(const std::vector<glm::vec3>& positions, const std::vector<glm::vec3>& colors);
 	// This has vec3 for colors, alpha is set to 1.0f
 	Mesh(const std::vector<glm::vec3>& positions, const std::vector<glm::vec3>& colors, const std::vector<GLuint>& indices);
@@ -43,6 +45,7 @@ public:
 	void MultiRainbow();
 private:
 	void Setup();
+	void InitUniforms();
 	void DrawFully(const ShaderProgram&) const;
 	void DrawVertices() const;
 	void DrawElements() const;

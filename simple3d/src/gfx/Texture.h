@@ -21,4 +21,6 @@ struct Texture
 	GLuint id;
 	TextureType type;
 	aiString path;
+
+	bool placeholder;
 };

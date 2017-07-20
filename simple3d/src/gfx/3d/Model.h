@@ -16,6 +16,7 @@
 #include <vector>
 #include <string>
 
+#include "Material.h"
 #include "Mesh.h"
 #include "../ShaderProgram.h"
 
@@ -32,6 +33,8 @@ private:
 	glm::mat4 translation_matrix_;
 	glm::mat4 rotation_matrix_;
 	glm::mat4 scaling_matrix_;
+
+	static const char* default_texture_path_;
 public:
 	Model(const GLchar* path);
 	Model(const std::vector<Mesh>& meshes);
@@ -68,5 +71,6 @@ private:
 		aiTextureType type);
 
 	static GLuint TextureFromFile(const GLchar* path, const std::string& directory);
+	static GLuint TextureDefault(); // White 1x1 texture
 };
 
