@@ -1,6 +1,7 @@
 # Simple3D
 ### A simple [sic] 3D graphics sort-of-engine I made in college
-[![](documents/videolink.jpg)](https://youtu.be/qtS_dguxp7c)
+
+[![Sponza Showcase](https://img.youtube.com/vi/qtS_dguxp7c/0.jpg)](https://www.youtube.com/watch?v=qtS_dguxp7c)
 
 It supports the basic stuff, such as:
 * Model loading
