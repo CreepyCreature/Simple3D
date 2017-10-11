@@ -1,5 +1,5 @@
 # Simple3D
-### A simple [sic] 3D graphics sort-of-engine I made in college
+### A simple 3D [sic] graphics sort-of-engine I made in college
 
 [![Sponza Showcase](https://img.youtube.com/vi/qtS_dguxp7c/0.jpg)](https://www.youtube.com/watch?v=qtS_dguxp7c)
 
