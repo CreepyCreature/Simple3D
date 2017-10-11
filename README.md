@@ -9,6 +9,8 @@ It supports the basic stuff, such as:
 * Lighting (using Phong Shading)
 * Keyboard/Mouse and Controller input
 
+### Legal stuff
+
 Simple3D is made in the Public Domain by me, Emin-Adrian Muedin (a.k.a. CreepyCreature). You can do whatever you want with it,
 just be nice about it :). This means that you have no legal obligations but I definitely appreciate attribution.
 
