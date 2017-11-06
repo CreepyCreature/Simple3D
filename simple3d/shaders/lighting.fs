@@ -7,6 +7,8 @@ in vec2 TexCoords;
 
 out vec4 color;
 
+uniform bool normal_only = false;
+
 struct Material 
 {
 	sampler2D diffuse;
@@ -31,7 +33,7 @@ struct DirLight
 	vec3 diffuse;
 	vec3 specular;
 
-	bool active;
+	bool is_active;
 };
 uniform DirLight u_dir_lights[kMaxDirLights];
 uniform int u_nrdirlights = 0;
@@ -51,7 +53,7 @@ struct PointLight
 	float linear;
 	float quadratic;
 
-	bool active;
+	bool is_active;
 };
 uniform PointLight u_point_lights[kMaxPointLights];
 uniform int u_nrpointlights = 0;
@@ -73,7 +75,7 @@ struct SpotLight
 	float linear;
 	float quadratic;
 
-	bool active;
+	bool is_active;
 };
 uniform SpotLight u_spot_lights[kMaxSpotLights];
 uniform int u_nrspotlights = 0;
@@ -92,29 +94,29 @@ void main()
 	// Resulting color, starts off as (0, 0, 0)
 	vec3 result = vec3(0.0f);
 
-	// Process each active directional light
+	// Process each is_active directional light
 	for (int i = 0; i < u_nrdirlights; ++i)
 	{		
-		if (u_dir_lights[i].active) 
+		if (u_dir_lights[i].is_active) 
 		{
 			result += CalculateDirLight(u_dir_lights[i], norm, viewDir);
 		}
 		
 	}
 
-	// Process each active point light
+	// Process each is_is_active point light
 	for (int i = 0; i < u_nrpointlights; ++i) 
 	{
-		if (u_point_lights[i].active) 
+		if (u_point_lights[i].is_active) 
 		{
 			result += CalculatePointLight(u_point_lights[i], norm, FragPos, viewDir);
 		}
 	}
 
-	// Process each active spot light
+	// Process each is_active spot light
 	for (int i = 0; i < u_nrspotlights; ++i) 
 	{
-		if (u_spot_lights[i].active)
+		if (u_spot_lights[i].is_active)
 		{
 			result += CalculateSpotLight(u_spot_lights[i], norm, FragPos, viewDir);
 		}
@@ -124,8 +126,10 @@ void main()
 	//result += vec3(texture(material.diffuse, TexCoords)) * 0.00001 + shininess * 0.00001;
 	//result += vec3(texture(material.specular, TexCoords));
 	//color = vec4(result, 1.0f);
-	color = vec4(result, material.opacity); // <-- Default
-	//color = vec4(norm, 1.0f);
+	if (!normal_only)
+		color = vec4(result, material.opacity); // <-- Default
+	else 
+		color = vec4(norm, 1.0f);
 	//color = texture(material.specular, TexCoords);
 
 	//color = texture(material.specular, TexCoords);

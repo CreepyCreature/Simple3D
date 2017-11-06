@@ -168,7 +168,7 @@ GLvoid SpotLight::UpdateShaders(const ShaderProgram & program, const GLuint ligh
 		);
 		glUniform1i(
 			glGetUniformLocation(program.ID(),
-			(structstr + ".active").c_str()),
+			(structstr + ".is_active").c_str()),
 			active_
 		);
 		program.Unbind();
@@ -185,7 +185,7 @@ GLvoid SpotLight::UpdateShaders(const ShaderProgram & program, const GLuint ligh
 			<< glGetUniformLocation(program.ID(), (structstr + ".constant"		).c_str()) << " "
 			<< glGetUniformLocation(program.ID(), (structstr + ".linear"		).c_str()) << " "
 			<< glGetUniformLocation(program.ID(), (structstr + ".quadratic"		).c_str()) << " "
-			<< glGetUniformLocation(program.ID(), (structstr + ".active"		).c_str()) << " "
+			<< glGetUniformLocation(program.ID(), (structstr + ".is_active"		).c_str()) << " "
 			<< std::endl;
 #endif // DEBUG
 

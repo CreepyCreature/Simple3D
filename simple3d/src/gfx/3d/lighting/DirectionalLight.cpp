@@ -70,7 +70,7 @@ GLvoid DirectionalLight::UpdateShaders(const ShaderProgram& program, const GLuin
 	);
 	glUniform1i(
 		glGetUniformLocation(program.ID(),
-			(structstr + ".active").c_str()
+			(structstr + ".is_active").c_str()
 		),
 		active_
 	);
@@ -82,7 +82,7 @@ GLvoid DirectionalLight::UpdateShaders(const ShaderProgram& program, const GLuin
 		<< glGetUniformLocation(program.ID(), (structstr + ".ambient"	).c_str()) << " "
 		<< glGetUniformLocation(program.ID(), (structstr + ".diffuse"	).c_str()) << " "
 		<< glGetUniformLocation(program.ID(), (structstr + ".specular"	).c_str()) << " "
-		<< glGetUniformLocation(program.ID(), (structstr + ".active"	).c_str()) << " "
+		<< glGetUniformLocation(program.ID(), (structstr + ".is_active"	).c_str()) << " "
 		<< std::endl;
 #endif // DEBUG
 

@@ -60,6 +60,8 @@ public:
 	GLuint ViewUniformLocation()			const;
 	GLuint ProjectionUniformLocation()		const;
 	GLuint ViewPositionUniformLocation()	const;
+
+	GLvoid SetUniform1i(const GLchar*, GLint);
 private:
 	GLuint GetModelUniformLocation();
 	GLuint GetViewUniformLocation();

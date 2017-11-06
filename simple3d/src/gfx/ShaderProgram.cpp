@@ -218,3 +218,13 @@ GLuint ShaderProgram::GetViewPositionUniformLocation()
 {
 	return glGetUniformLocation(program_, "u_viewpos");
 }
+
+GLvoid ShaderProgram::SetUniform1i(const GLchar* uniform_name, GLint value)
+{
+	Bind();
+	glUniform1i(
+		glGetUniformLocation(program_, uniform_name),
+		value
+	);
+	Unbind();
+}

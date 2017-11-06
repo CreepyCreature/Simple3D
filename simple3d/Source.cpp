@@ -2,8 +2,7 @@
 
 
 /*
- *	Compile this for x86 (i.e. 32bit) unless you link the x86_64 
- *	version of the used libraries.
+ *	Make sure you compile it for x86!
  *
  *	Limitation: If a textured model that has no Specular Maps
  *	is drawn with the default Lighting Shader the resulting shading is
@@ -11,9 +10,10 @@
  *
 **/
 
-
 int main() 
 {
+	GLdouble load_0 = Time();
+
 	int width = 1280;
 	int height = 720;
 	Window window(width, height);
@@ -104,7 +104,12 @@ int main()
 	point.Scale(glm::vec3(0.2));
 
 	Model model("../_models/sponza_obj/sponza.obj");
-	model.Scale(glm::vec3(0.1));
+	//Model model("../_models/cta_obj/Cta.obj");
+	//Model model("../_models/fireplace_room/fireplace_room.obj");
+	//Model model("../_models/rungholt/rungholt.obj");
+	model.Scale(glm::vec3(0.2));
+	//model.Scale(glm::vec3(10.1));
+	//model.TranslateBy(glm::vec3(-30.0f, -10.5f, -70.0f));
 
 	Camera camera(&window);
 	JoystickManager* joy = JoystickManager::Instance();
@@ -121,12 +126,16 @@ int main()
 	olight.SetAllColor(0.0f, 0.6f, 0.0f);
 	alight.SetAllColor(0.0f, 0.0f, 0.6f);
 
-	otherdirlight.SetDirection(-2.2f, -1.0f, 0.3f);
+	otherdirlight.SetDirection(-0.6f, -1.0f, 0.3f);
 	otherdirlight.SetAmbient(0.125f, 0.1f, 0.075f);
-	otherdirlight.SetDiffuse(0.5f, 0.4f, 0.3f);
-	otherdirlight.SetSpecular(0.7f, 0.7f, 0.7f);
+	otherdirlight.SetDiffuse(0.7f, 0.6f, 0.5f);
+	otherdirlight.SetSpecular(0.85f, 0.85f, 0.85f);
 
 	dirlight.	SetActive(false);
+	//plight.SetActive(false);
+	//olight.SetActive(false);
+	//alight.SetActive(false);
+	//spot.SetActive(false);
 	
 	LightingManager lighting;
 	lighting.AddLight(&dirlight);
@@ -137,7 +146,11 @@ int main()
 	lighting.AddLight(&spot);
 	lighting.AddLight(&flashlight);
 
+	std::cout << "Reached the draw loop in " << Time() - load_0 << std::endl;
+
+	GLfloat spoty = -100.f;
 	GLfloat t = Time();	
+	bool normal_only = false;
 	while (!window.ShouldClose() && !window.KeyPressed(KEY_ESCAPE))
 	{		
 		camera.Update();
@@ -170,9 +183,19 @@ int main()
 			(glm::sin(glm::radians(t) * 100 - 10)) * 10
 		);
 
+		/* The Witch of Agnesi*/
+		GLfloat r = 10.0f;
+		GLfloat x = glm::sin(glm::radians(t) * 20.f) * 40.f;
+		GLfloat y = (8.f * r * r * r) / (x * x + 4 * r * r);
+
+		
+		if (window.KeyPressed(KEY_DOWN)) spoty += -10.f;
+		if (window.KeyPressed(KEY_UP)) spoty += +10.f;
+
+		spot.SetPosition(x, y + 50.0f, 0.f);
 		spot.SetDirection(
 			(glm::cos(glm::radians(t) * 35)) * 100,
-			0.0f,
+			spoty,
 			(glm::sin(glm::radians(t) * 35)) * 100
 		);
 		flashlight.SetPosition(camera.Position());
@@ -208,8 +231,13 @@ int main()
 		{
 			model.Draw(basicprogram);
 		} else 	model.Draw(program);
+		if (window.KeyDown(KEY_N))
+		{
+			normal_only = !normal_only;
+			program.SetUniform1i("normal_only", normal_only);
+		}
 
-		// When the window mode changes, the cursor position spikes if the cursor is disabled
+
 		if (window.KeyPressed(KEY_RIGHT_ALT) &&
 			window.KeyDown(KEY_ENTER))
 		{
