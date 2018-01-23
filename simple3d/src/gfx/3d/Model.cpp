@@ -135,7 +135,8 @@ GLvoid Model::LoadModel(const std::string & path)
 {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path,
-		aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+		aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals
+		| aiProcess_CalcTangentSpace);
 
 	if (!scene || !scene->mRootNode || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE)
 	{
@@ -207,6 +208,13 @@ Mesh Model::ProcessMesh(const aiMesh * mesh, const aiScene * const scene)
 			vertex.normal.x = mesh->mNormals[i].x;
 			vertex.normal.y = mesh->mNormals[i].y;
 			vertex.normal.z = mesh->mNormals[i].z;
+		}
+		// Vertex Tangent
+		if (mesh->HasTangentsAndBitangents())
+		{
+			vertex.tangent.x = mesh->mTangents[i].x;
+			vertex.tangent.y = mesh->mTangents[i].y;
+			vertex.tangent.z = mesh->mTangents[i].z;
 		}
 		// Vertex UV (Texture Coordinates)
 		if (mesh->mTextureCoords[0])
@@ -387,11 +395,12 @@ GLuint Model::TextureFromFile(const GLchar * path, const std::string & directory
 	glGenTextures(1, &texid);
 	glBindTexture(GL_TEXTURE_2D, texid);
 	// Assign the bytes from the image to the texture and generate mipmaps for it
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	/* TODO: Internal format should be set as GL_RGB for Specular and Normal Maps 
+	*	(i.e. it should not be gamma corrected!)
+	*/
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	std::cout << "Mipmaps\n";
 	glGenerateMipmap(GL_TEXTURE_2D);
-
-
 
 	// Set some useful texture parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

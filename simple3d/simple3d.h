@@ -42,6 +42,7 @@ double Time()
 	return glfwGetTime();
 }
 
+// The following are just the GLFW_KEY_* macros with the GLFW_ prefix removed
 
 #define 	KEY_UNKNOWN   -1
 

@@ -104,12 +104,7 @@ int main()
 	point.Scale(glm::vec3(0.2));
 
 	Model model("../_models/sponza_obj/sponza.obj");
-	//Model model("../_models/cta_obj/Cta.obj");
-	//Model model("../_models/fireplace_room/fireplace_room.obj");
-	//Model model("../_models/rungholt/rungholt.obj");
 	model.Scale(glm::vec3(0.2));
-	//model.Scale(glm::vec3(10.1));
-	//model.TranslateBy(glm::vec3(-30.0f, -10.5f, -70.0f));
 
 	Camera camera(&window);
 	JoystickManager* joy = JoystickManager::Instance();
@@ -130,6 +125,7 @@ int main()
 	otherdirlight.SetAmbient(0.125f, 0.1f, 0.075f);
 	otherdirlight.SetDiffuse(0.7f, 0.6f, 0.5f);
 	otherdirlight.SetSpecular(0.85f, 0.85f, 0.85f);
+	spot.SetSpecular(0.67, 0.67, 0.67);
 
 	dirlight.	SetActive(false);
 	//plight.SetActive(false);
@@ -151,6 +147,8 @@ int main()
 	GLfloat spoty = -100.f;
 	GLfloat t = Time();	
 	bool normal_only = false;
+	bool phong_spec = true;
+	bool rotate = true;
 	while (!window.ShouldClose() && !window.KeyPressed(KEY_ESCAPE))
 	{		
 		camera.Update();
@@ -167,21 +165,26 @@ int main()
 		{
 			otherdirlight.SetActive(!otherdirlight.Active());
 		}
-		olight.SetPosition(
-			(glm::cos(glm::radians(t) * 100)) * 10,
-			5.0f,
-			(glm::sin(glm::radians(t) * 100)) * 10
-		);
-		plight.SetPosition(
-			(glm::cos(glm::radians(t) * 100 + 10)) * 10,
-			5.0f,
-			(glm::sin(glm::radians(t) * 100 + 10)) * 10
-		);
-		alight.SetPosition(
-			(glm::cos(glm::radians(t) * 100 - 10)) * 10,
-			5.0f,
-			(glm::sin(glm::radians(t) * 100 - 10)) * 10
-		);
+				
+		if (rotate)
+		{
+			olight.SetPosition(
+				(glm::cos(glm::radians(t) * 100)) * 10,
+				5.0f,
+				(glm::sin(glm::radians(t) * 100)) * 10
+			);
+			plight.SetPosition(
+				(glm::cos(glm::radians(t) * 100 + 10)) * 10,
+				5.0f,
+				(glm::sin(glm::radians(t) * 100 + 10)) * 10
+			);
+			alight.SetPosition(
+				(glm::cos(glm::radians(t) * 100 - 10)) * 10,
+				5.0f,
+				(glm::sin(glm::radians(t) * 100 - 10)) * 10
+			);
+			rotate = true;
+		}
 
 		/* The Witch of Agnesi*/
 		GLfloat r = 10.0f;
@@ -230,11 +233,20 @@ int main()
 		if (window.KeyPressed(KEY_B))
 		{
 			model.Draw(basicprogram);
-		} else 	model.Draw(program);
+		}
+		else
+		{
+			model.Draw(program);
+		}
 		if (window.KeyDown(KEY_N))
 		{
 			normal_only = !normal_only;
 			program.SetUniform1i("normal_only", normal_only);
+		}
+		if (window.KeyDown(KEY_P))
+		{
+			phong_spec = !phong_spec;
+			program.SetUniform1i("phong_spec", phong_spec);
 		}
 
 

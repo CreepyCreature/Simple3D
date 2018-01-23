@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 
 #include <vector>
+#include <unordered_map>
 
 #include "Material.h"
 #include "Vertex.h"
@@ -23,6 +24,8 @@ private:
 	// Material Data
 	std::vector<Texture> textures_;
 	Material material_;
+
+	mutable std::unordered_map<std::string, int> uniform_location_cache_;
 
 	// Buffer Objects
 	GLuint vao_;
@@ -50,5 +53,6 @@ private:
 	void DrawVertices() const;
 	void DrawElements() const;
 	void UpdateVertexBuffer();
+	int GetUniformLocation(unsigned int program_id, const std::string& name) const;
 };
 

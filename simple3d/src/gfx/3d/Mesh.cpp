@@ -96,14 +96,22 @@ void Mesh::Setup()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 
 		(GLvoid*)offsetof(Vertex, position));
+
 	// Vertex normal
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 
 		(GLvoid*)offsetof(Vertex, normal));
+
 	// Vertex texture coordinates
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), 
 		(GLvoid*)offsetof(Vertex, tex_coords));
+
+	// Vertex tangent
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+		(GLvoid*)offsetof(Vertex, tangent));
+
 	// Vertex color
 	glEnableVertexAttribArray(5);
 	glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 
@@ -120,6 +128,23 @@ void Mesh::Setup()
 void Mesh::InitUniforms()
 {
 
+}
+
+int Mesh::GetUniformLocation(unsigned int program_id, const std::string& name) const
+{
+	if (uniform_location_cache_.count(name) > 0)
+	{
+		return uniform_location_cache_[name];
+	}
+
+	int location = glGetUniformLocation(program_id, name.c_str());
+	uniform_location_cache_[name] = location;
+	if (location == -1)
+	{
+		std::cout << "Warning! Shader Uniform \"" + name + "\" in Program " << program_id << " does not exist!" << std::endl;
+	}
+
+	return location;
 }
 
 void Mesh::Draw(const ShaderProgram& program) const
@@ -156,23 +181,23 @@ void Mesh::DrawFully(const ShaderProgram& program) const
 
 	// Set the material colors (Ka, Kd, Ks)
 	glUniform3f(
-		glGetUniformLocation(program.ID(), materialka.c_str()),
+		GetUniformLocation(program.ID(), materialka.c_str()),
 		material_.color_ambient.r, material_.color_ambient.g, material_.color_ambient.b
 	);
 	glUniform3f(
-		glGetUniformLocation(program.ID(), materialkd.c_str()),
+		GetUniformLocation(program.ID(), materialkd.c_str()),
 		material_.color_diffuse.r, material_.color_diffuse.g, material_.color_diffuse.b
 	);
 	glUniform3f(
-		glGetUniformLocation(program.ID(), materialks.c_str()),
+		GetUniformLocation(program.ID(), materialks.c_str()),
 		material_.color_specular.r, material_.color_specular.g, material_.color_specular.b
 	);
 	glUniform1f(
-		glGetUniformLocation(program.ID(), materialshiny.c_str()),
+		GetUniformLocation(program.ID(), materialshiny.c_str()),
 		material_.shininess
 	);
 	glUniform1f(
-		glGetUniformLocation(program.ID(), materialopacity.c_str()),
+		GetUniformLocation(program.ID(), materialopacity.c_str()),
 		material_.opacity
 	);
 
@@ -198,7 +223,7 @@ void Mesh::DrawFully(const ShaderProgram& program) const
 			std::cout << "Applying diffuse map!" << std::endl;
 			#endif // DEBUG
 
-			sampler_uniform = glGetUniformLocation(program.ID(), materialdiff.c_str());
+			sampler_uniform = GetUniformLocation(program.ID(), materialdiff.c_str());
 		}
 		else if (textures_[i].type == TextureType::SPECULAR_MAP)
 		{
@@ -206,8 +231,8 @@ void Mesh::DrawFully(const ShaderProgram& program) const
 			std::cout << "Applying specular map!" << std::endl;
 			#endif // DEBUG
 
-			sampler_uniform = glGetUniformLocation(program.ID(), materialspec.c_str());
-			glUniform1f(glGetUniformLocation(program.ID(), materialshiny.c_str()),
+			sampler_uniform = GetUniformLocation(program.ID(), materialspec.c_str());
+			glUniform1f(GetUniformLocation(program.ID(), materialshiny.c_str()),
 				material_.shininess);
 		}
 

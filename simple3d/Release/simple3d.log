@@ -1,0 +1,35 @@
+﻿  SpotLight.cpp
+src\gfx\3d\lighting\SpotLight.cpp(28): warning C4305: '=': truncation from 'double' to 'GLfloat'
+src\gfx\3d\lighting\SpotLight.cpp(30): warning C4305: '=': truncation from 'double' to 'GLfloat'
+src\gfx\3d\lighting\SpotLight.cpp(31): warning C4305: '=': truncation from 'double' to 'GLfloat'
+  PointLight.cpp
+src\gfx\3d\lighting\PointLight.cpp(27): warning C4305: '=': truncation from 'double' to 'GLfloat'
+  LightingManager.cpp
+  DirectionalLight.cpp
+  Model.cpp
+  Camera.cpp
+src\gfx\3d\Camera.cpp(52): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+src\gfx\3d\Camera.cpp(176): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Mesh.cpp
+  ShaderProgram.cpp
+src\gfx\ShaderProgram.cpp(20): warning C4018: '<': signed/unsigned mismatch
+src\gfx\ShaderProgram.cpp(134): warning C4018: '<': signed/unsigned mismatch
+src\gfx\ShaderProgram.cpp(151): warning C4018: '<': signed/unsigned mismatch
+  Renderer.cpp
+  Source.cpp
+Source.cpp(104): warning C4305: 'argument': truncation from 'double' to 'float'
+Source.cpp(107): warning C4305: 'argument': truncation from 'double' to 'float'
+Source.cpp(128): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+Source.cpp(148): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+Source.cpp(262): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+  JoystickManager.cpp
+  Window.cpp
+src\Window.cpp(169): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+src\Window.cpp(170): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+d:\proiecte\3d\projects\_github\simple3d\simple3d\src\gfx\renderer.cpp(35): warning C4715: 'Renderer::Init': not all control paths return a value
+  All 1531 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\Proiecte\3d\Projects\_github\Simple3D\Release\vc120.pdb'; linking object as if no debug info
+  simple3d.vcxproj -> D:\Proiecte\3d\Projects\_github\Simple3D\Release\simple3d.exe
