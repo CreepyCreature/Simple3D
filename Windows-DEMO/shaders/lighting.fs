@@ -312,7 +312,8 @@ vec3 ComputeCookTorranceReflection(vec3 lightDir, vec3 viewDir, vec3 normal, vec
 		float D = ComputeMicrofacetDistFunc(NdotH);
 		float G = ComputeGeometricalAttenuation(lightDir, viewDir, normal, NdotH, LdotH);
 
-		specular_reflection = spec_color * G * F * vec3(D / (M_PI * NdotV * NdotL));
+		//specular_reflection = spec_color * G * F * vec3(D / (M_PI * NdotV * NdotL));
+		specular_reflection = spec_color * G * F * vec3(D / (4 * NdotV * NdotL));
 		//specular_reflection = spec_color * G * vec3(D / (M_PI * NdotV * NdotL));
 	}
 
@@ -351,8 +352,11 @@ float ComputeMicrofacetDistFunc(float NdotH)
 {
 	// Using an isotropic material, same roughness in every angle
 	float m = ShininessToRoughness(material.shininess);
+	float m_2 = m * m;
+	float NoH_2 = NdotH * NdotH;
+	float NoH_4 = NoH_2 * NoH_2;
 	// Beckmann Distribution
-	float D = (1 / (4 * pow(m, 2) * pow(NdotH, 4))) * exp( (pow(NdotH, 2) - 1) / (pow(m, 2) * pow(NdotH, 2)) );
+	float D = (1 / (4 * m_2 * NoH_4)) * exp( (NoH_2 - 1) / (m_2 * NoH_2) );
 
 	return D;
 }
