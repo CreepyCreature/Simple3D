@@ -1,7 +1,7 @@
 # Simple3D
 ### A simple 3D graphics/rendering engine I made in college
 
-[![Sponza Showcase](https://img.youtube.com/vi/qtS_dguxp7c/0.jpg)](https://www.youtube.com/watch?v=qtS_dguxp7c)
+[![Sponza Showcase](https://img.youtube.com/vi/-xXdZLhu2Z0/0.jpg)](https://youtu.be/-xXdZLhu2Z0)
 
 It supports the basic stuff, such as:
 * Model loading

@@ -138,6 +138,7 @@
     <ClInclude Include="src\gfx\3d\lighting\PointLight.h" />
     <ClInclude Include="src\gfx\3d\lighting\LightingManager.h" />
     <ClInclude Include="src\gfx\3d\lighting\DirectionalLight.h" />
+    <ClInclude Include="src\gfx\3d\Material.h" />
     <ClInclude Include="src\gfx\3d\Model.h" />
     <ClInclude Include="src\gfx\3d\Camera.h" />
     <ClInclude Include="src\gfx\3d\Mesh.h" />
